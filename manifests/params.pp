@@ -6,12 +6,10 @@
 class netrc::params {
   case $::osfamily {
     'Debian': {
-      $package_name = 'netrc'
-      $service_name = 'netrc'
+      $default_home_path = '/home'
     }
     'RedHat', 'Amazon': {
-      $package_name = 'netrc'
-      $service_name = 'netrc'
+      $default_home_path = '/home'
     }
     default: {
       fail("${::operatingsystem} not supported")
