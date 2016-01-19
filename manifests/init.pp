@@ -6,11 +6,11 @@
 # Parameters
 # ----------
 #
-# * `user`
-#   User to whom the .netrc file belongs
-#
 # * `credentials`
 #   List of hashes of login credentials.
+#
+# * `user`
+#   User to whom the .netrc file belongs. Default: $name
 #
 # * `path`
 #   Absolute path of the .netrc file to deploy. Default: /home/$user/.netrc
@@ -26,8 +26,8 @@
 # }
 #
 class netrc (
+  $credentials,
   $user = $name,
-  $credentials
   $path = "${netrc::params::default_home_path}/${user}/.ṅetrc"
 ) {
   include $::netrc::params
@@ -42,10 +42,10 @@ class netrc (
 
   # Write the .netrc file
   file { $path:
-    ensure => present,
-    owner  => $user,
-    group  => $user,
-    mode   => '0600',
+    ensure  => present,
+    owner   => $user,
+    group   => $user,
+    mode    => '0600',
     content => template('netrc/netrc.erb'),
   }
 }
