@@ -6,59 +6,62 @@ Status](https://travis-ci.org/code-management/netrc.svg?branch=master)](https://
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with netrc](#setup)
-    * [What netrc affects](#what-netrc-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with netrc](#beginning-with-netrc)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+3. [Usage](#usage)
+4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
+7. [Contributors](#contributors)
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves. This is your 30 second elevator pitch for your module. Consider including OS/Puppet version it works with.       
+Puppet module for the deployment of GNU `.netrc` files. Supports Puppet4 (and Puppet3 with future parser)
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
-
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
-
-## Setup
-
-### What netrc affects
-
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here. 
-
-### Beginning with netrc
-
-The very basic steps needed for a user to get the module up and running. 
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+This module provides an easy way to manage and deploy machine credentials to user specific `.netrc` files. 
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
+The netrc module uses an array of credential hashes to populate a `.netrc` file template on a user specific basis.
+These credential hashes can be supplied as parameters to the netrc module, or through a data input mechanism such as hiera, or hiera-eyaml.
+
+---
+include netrc
+netrc { 'myuser':
+   credentials => [
+     { machine => 'myserver.com',   login => 'foobar', password => 'hunter5'},
+     { machine => 'yourserver.com', login => 'alice',  password => 'bob256'}
+   ],
+ }
+}
+---
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
+### Classes
+
+#### Public Classes
+
+* `netrc`: Configures a `.netrc` file
+
+##### Parameters
+The following parameters are available in `netrc`:
+
+###### `user`
+
+###### `path`
+
+###### `credentials`
+
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Module is currently only tested on Ubuntu 14.04, but Debian and RHEL systems are supported. 
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
+TODO
 
-## Release Notes/Contributors/Etc **Optional**
+## Contributors
 
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+List of contributors can be found at: [https://github.com/code-management/netrc/graphs/contributors](https://github.com/code-management/netrc/graphs/contributors)
