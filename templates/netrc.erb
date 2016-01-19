@@ -1,0 +1,5 @@
+<% @credentials.each do |machine_entry| -%>
+machine <%= machine_entry['machine'] %>
+    login <%= machine_entry['login'] %>
+    password <%= machine_entry['password'] %>
+<% end -%>
