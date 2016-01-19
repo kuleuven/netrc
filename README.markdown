@@ -1,3 +1,7 @@
+[![Build
+Status](https://travis-ci.org/code-management/netrc.svg?branch=master)](https://travis-ci.org/code-management/netrc)
+
+
 #### Table of Contents
 
 1. [Overview](#overview)
