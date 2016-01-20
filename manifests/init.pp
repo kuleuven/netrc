@@ -27,24 +27,23 @@
 #
 class netrc (
   $credentials,
-  $user = $name,
-  $path = "${netrc::params::default_home_path}/${user}/.ṅetrc"
-) {
-  include $::netrc::params
+  $user     = $name,
+  $user_dir = $netrc::params::default_user_dir
+) inherits netrc::params {
+
 
   # validate parameters here
   validate_string($user)
-  validate_absolute_path($path)
+  validate_absolute_path($user_dir)
   validate_array($credentials)
   $credentials.each | $machine_entry | { validate_hash($machine_entry) }
 
 
 
   # Write the .netrc file
-  file { $path:
+  file { "${user_dir}/${user}/.netrc":
     ensure  => present,
     owner   => $user,
-    group   => $user,
     mode    => '0600',
     content => template('netrc/netrc.erb'),
   }
