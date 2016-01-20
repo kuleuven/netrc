@@ -10,7 +10,6 @@ describe 'netrc' do
 
         context "netrc class without any parameters" do
           it { is_expected.to compile.with_all_deps }
-
         end
       end
     end
