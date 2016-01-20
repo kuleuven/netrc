@@ -59,4 +59,5 @@ task :test => [
   :syntax,
   :lint,
   :rubocop,
+  :spec,
 ]
