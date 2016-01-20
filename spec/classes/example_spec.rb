@@ -11,13 +11,6 @@ describe 'netrc' do
         context "netrc class without any parameters" do
           it { is_expected.to compile.with_all_deps }
 
-          it { is_expected.to contain_class('netrc::params') }
-          it { is_expected.to contain_class('netrc::install').that_comes_before('netrc::config') }
-          it { is_expected.to contain_class('netrc::config') }
-          it { is_expected.to contain_class('netrc::service').that_subscribes_to('netrc::config') }
-
-          it { is_expected.to contain_service('netrc') }
-          it { is_expected.to contain_package('netrc').with_ensure('present') }
         end
       end
     end
@@ -32,7 +25,7 @@ describe 'netrc' do
         }
       end
 
-      it { expect { is_expected.to contain_package('netrc') }.to raise_error(Puppet::Error, /Nexenta not supported/) }
+      it { expect { should compile }.to raise_error(Puppet::Error, /Nexenta not supported/) }
     end
   end
 end

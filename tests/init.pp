@@ -10,3 +10,13 @@
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
 include ::netrc
+
+netrc { 'myuser':
+  credentials => [
+    {
+      machine  => 'foobar.com',
+      login    =>'foo',
+      password =>'hunter5',
+    },
+  ],
+}
