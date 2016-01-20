@@ -26,14 +26,15 @@ The netrc module uses an array of credential hashes to populate a `.netrc` file 
 These credential hashes can be supplied as parameters to the netrc module, or through a data input mechanism such as hiera, or hiera-eyaml.
 
 ---
+
 include netrc
 netrc { 'myuser':
    credentials => [
      { machine => 'myserver.com',   login => 'foobar', password => 'hunter5'},
      { machine => 'yourserver.com', login => 'alice',  password => 'bob256'}
    ],
- }
 }
+
 ---
 
 ## Reference
