@@ -25,8 +25,8 @@ This module provides an easy way to manage and deploy machine credentials to use
 The netrc module uses an array of credential hashes to populate a `.netrc` file template on a user specific basis.
 These credential hashes can be supplied as parameters to the netrc module, or through a data input mechanism such as hiera, or hiera-eyaml.
 
----
 
+```
 include netrc
 netrc { 'myuser':
    credentials => [
@@ -34,8 +34,7 @@ netrc { 'myuser':
      { machine => 'yourserver.com', login => 'alice',  password => 'bob256'}
    ],
 }
-
----
+```
 
 ## Reference
 
