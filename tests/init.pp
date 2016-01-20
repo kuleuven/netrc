@@ -15,8 +15,8 @@ netrc { 'myuser':
   credentials => [
     {
       machine  => 'foobar.com',
-      login    =>'foo',
-      password =>'hunter5',
+      login    => 'foo',
+      password => 'hunter5',
     },
   ],
 }
