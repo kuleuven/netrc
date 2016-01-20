@@ -6,10 +6,10 @@
 class netrc::params {
   case $::osfamily {
     'Debian': {
-      $default_home_path = '/home'
+      $default_user_dir = '/home'
     }
     'RedHat', 'Amazon': {
-      $default_home_path = '/home'
+      $default_user_dir = '/home'
     }
     default: {
       fail("${::operatingsystem} not supported")
