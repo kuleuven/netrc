@@ -1,50 +1,43 @@
-# Class: netrc
+# Clsas: netrc
 # ===========================
 #
-# Full description of class netrc here.
+# Parent class for netrc
 #
 # Parameters
 # ----------
-#
-# * `credentials`
-#   List of hashes of login credentials.
 #
 # * `user`
 #   User to whom the .netrc file belongs. Default: $name
 #
 # * `path`
-#   Absolute path of the .netrc file to deploy. Default: /home/$user/.netrc
+#   Absolute path to .netrc file. Default: /home/$user/.netrc
+#
+# * `group`
+#   Group to assign to .netrc file. Default: $user
 #
 # Example
 # -------
 #
-# netrc { 'myuser':
-#   credentials => [
-#     { machine => 'myserver.com', login => 'foobar', password => 'hunter5'},
-#     { machine => 'yourserver.com', login => 'alice', password => 'bob256'}
-#   ],
-# }
 #
 class netrc (
-  $credentials,
-  $user     = $name,
-  $user_dir = $netrc::params::default_user_dir
+  $user,
+  $path     = "${netrc::params::default_user_dir}/${user}/.netrc",
+  $group    = $user,
 ) inherits netrc::params {
 
-
-  # validate parameters here
+  # Validation
   validate_string($user)
-  validate_absolute_path($user_dir)
-  validate_array($credentials)
-  $credentials.each | $machine_entry | { validate_hash($machine_entry) }
+  validate_absolute_path($path)
+  validate_string($group)
 
 
-
-  # Write the .netrc file
-  file { "${user_dir}/${user}/.netrc":
-    ensure  => present,
-    owner   => $user,
-    mode    => '0600',
-    content => template('netrc/netrc.erb'),
+  concat { $path:
+    ensure         => present,
+    owner          => $user,
+    group          => $group,
+    mode           => '0600',
+    warn           => true,
+    ensure_newline => true,
   }
+
 }
