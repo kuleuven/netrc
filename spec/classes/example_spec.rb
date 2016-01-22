@@ -33,25 +33,4 @@ describe 'netrc' do
       end
     end
   end
-
-  context 'unsupported operating system' do
-    describe 'netrc class on Solaris/Nexenta' do
-      let(:facts) do
-        {
-          :osfamily        => 'Solaris',
-          :operatingsystem => 'Nexenta',
-          :concat_basedir  => '/tmp',
-        }
-      end
-      
-      let(:params) do
-        {
-          :path => '/home/myuser/.netrc',
-          :user => 'myuser',
-        }
-      end
-      
-      it { expect { should compile }.to raise_error(/Nexenta not supported/) }
-    end
-  end
 end
