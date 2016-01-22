@@ -9,12 +9,12 @@ Status](https://travis-ci.org/code-management/netrc.svg?branch=master)](https://
 3. [Usage](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+6. [Dependencies](#dependencies)
 7. [Contributors](#contributors)
 
 ## Overview
 
-Puppet module for the deployment of GNU `.netrc` files. Supports Puppet4 (and Puppet3 with future parser)
+Puppet module for the deployment of GNU `.netrc` files. Supports Puppet3 & Puppet4
 
 ## Module Description
 
@@ -22,17 +22,16 @@ This module provides an easy way to manage and deploy machine credentials to use
 
 ## Usage
 
-The netrc module uses an array of credential hashes to populate a `.netrc` file template on a user specific basis.
-These credential hashes can be supplied as parameters to the netrc module, or through a data input mechanism such as hiera, or hiera-eyaml.
-
-
 ```
-include netrc
-netrc { 'myuser':
-   credentials => [
-     { machine => 'myserver.com',   login => 'foobar', password => 'hunter5'},
-     { machine => 'yourserver.com', login => 'alice',  password => 'bob256'}
-   ],
+class { 'netrc':
+   user => 'myuser',
+   path => '/home/myuser/.netrc',
+}
+
+netrc::machine { 'ftp.foo.com':
+   netrc_path => '/home/myuser/.netrc',
+   login      => 'remote_user',
+   password   => 'hunter5',
 }
 ```
 
@@ -43,30 +42,50 @@ netrc { 'myuser':
 #### Public Classes
 
 * `netrc`: Top level configuration of `.netrc` file
-* `netrc::machine`: Type representing a single entry in a `.netrc` file
 
 ##### Parameters
 The following parameters are available in `netrc`:
 
 ###### `user`
-Owner of the `.netrc` file to be created
-*Required*
+*Required* Owner of the `.netrc` file to be created
+
 
 ###### `path`
-Absolute path of the `.netrc` file to be created. 
-*Required*
+*Required* Absolute path of the `.netrc` file to be created. 
+
 
 ###### `group`
 Group of the `.netrc` file to be created. Defaults to `$user`
 
+#### Public Classes
+The `netrc` module has no private classes.
+
+#### Types
+
+##### `netrc::machine`
+Represents the login details for a single machine entry in a `.netrc` file
+
+##### Parameters
+###### `machine`
+*Required* Remote machine which the credentials are for. Default: $name
+
+###### `netrc_path`
+*Required* Absolute path to the `.netrc` file in which to store these credentials. Must be the same as that defined in the `netrc` resource
+
+###### `login`
+*Required* Username on remote machine
+
+###### `password`
+*Required* Password on remote machine
 
 ## Limitations
+* Supports only one `.netrc` file per machine
 
-Module is currently only tested on Ubuntu 14.04, but Debian and RHEL systems are supported. 
+## Dependencies
+`netrc` module depends on the following
 
-## Development
-
-TODO
+* [puppetlabs-stdlib](https://github.com/puppetlabs/puppetlabs-stdlib)
+* [puppetlabs-concat](https://github.com/puppetlabs/puppetlabs-concat)
 
 ## Contributors
 
