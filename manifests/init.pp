@@ -22,7 +22,7 @@
 class netrc (
   $user,
   $path,
-  $group    = $user,
+  $group = $user,
 ) inherits netrc::params {
 
   # Validation
