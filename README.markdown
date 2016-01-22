@@ -42,16 +42,22 @@ netrc { 'myuser':
 
 #### Public Classes
 
-* `netrc`: Configures a `.netrc` file
+* `netrc`: Top level configuration of `.netrc` file
+* `netrc::machine`: Type representing a single entry in a `.netrc` file
 
 ##### Parameters
 The following parameters are available in `netrc`:
 
 ###### `user`
+Owner of the `.netrc` file to be created
+*Required*
 
 ###### `path`
+Absolute path of the `.netrc` file to be created. 
+*Required*
 
-###### `credentials`
+###### `group`
+Group of the `.netrc` file to be created. Defaults to `$user`
 
 
 ## Limitations
