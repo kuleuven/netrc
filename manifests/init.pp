@@ -22,7 +22,7 @@
 class netrc (
   $user,
   $path,
-  $group = $user,
+  $group = '',
 ) inherits netrc::params {
 
   # Validation
@@ -30,11 +30,16 @@ class netrc (
   validate_absolute_path($path)
   validate_string($group)
 
+  if ($group == '') {
+    $concat_group = $user
+  } else {
+    $concat_group = $group
+  }
 
   concat { $path:
     ensure         => present,
     owner          => $user,
-    group          => $group,
+    group          => $concat_group,
     mode           => '0600',
     warn           => true,
     ensure_newline => true,
