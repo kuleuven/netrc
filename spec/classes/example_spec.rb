@@ -6,7 +6,9 @@ describe 'netrc' do
     on_supported_os.each do |os, facts|
       context "on #{os}" do
         let(:facts) do
-          { :concat_basedir => '/tmp'}
+          facts.merge({ 
+            :concat_basedir => '/tmp', 
+          })
         end
         
         
@@ -28,7 +30,6 @@ describe 'netrc' do
             })
           end
 
-          it { should have_concat_resource_count(1)}
         end
 
       end
