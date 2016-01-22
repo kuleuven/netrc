@@ -7,10 +7,10 @@
 # ----------
 #
 # * `user`
-#   User to whom the .netrc file belongs. Default: $name
+#   User to whom the .netrc file belongs.
 #
 # * `path`
-#   Absolute path to .netrc file. Default: /home/$user/.netrc
+#   Absolute path to .netrc file.
 #
 # * `group`
 #   Group to assign to .netrc file. Default: $user
@@ -21,7 +21,7 @@
 #
 class netrc (
   $user,
-  $path     = "${netrc::params::default_user_dir}/${user}/.netrc",
+  $path,
   $group    = $user,
 ) inherits netrc::params {
 
