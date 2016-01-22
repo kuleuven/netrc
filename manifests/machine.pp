@@ -33,8 +33,6 @@ define netrc::machine (
   $password,
   $machine      = $name,
 ) {
-  include ::netrc::params
-
 
   # validate parameters here
   validate_string($machine)
