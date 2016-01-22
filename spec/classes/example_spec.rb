@@ -29,9 +29,7 @@ describe 'netrc' do
               'group' => 'myuser'
             })
           end
-
         end
-
       end
     end
   end
