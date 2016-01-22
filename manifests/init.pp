@@ -23,7 +23,7 @@ class netrc (
   $user,
   $path,
   $group = '',
-) inherits netrc::params {
+) {
 
   # Validation
   validate_string($user)
