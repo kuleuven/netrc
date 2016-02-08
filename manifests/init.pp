@@ -1,4 +1,4 @@
-# Clsas: netrc
+# Class: netrc
 # ===========================
 #
 # Parent class for netrc
