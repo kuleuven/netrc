@@ -1,6 +1,6 @@
 {
   "name": "codemanagement-netrc",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "author": "codemanagement",
   "summary": "Puppet .netrc management",
   "license": "Apache-2.0",
