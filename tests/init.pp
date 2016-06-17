@@ -9,14 +9,13 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include ::netrc
+class { '::netrc':
+  user => 'myuser',
+  path => '/home/myuser/.netrc',
+}
 
-netrc { 'myuser':
-  credentials => [
-    {
-      machine  => 'foobar.com',
-      login    => 'foo',
-      password => 'hunter5',
-    },
-  ],
+netrc::machine { 'ftp.foo.com':
+  netrc_path => '/home/myuser/.netrc',
+  login      => 'remote_user',
+  password   => 'hunter5',
 }
