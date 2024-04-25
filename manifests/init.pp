@@ -20,15 +20,10 @@
 #
 #
 class netrc (
-  $user,
-  $path,
-  $group = '',
+  String $user,
+  Stdlib::Absolutepath $path,
+  String $group = '',
 ) {
-
-  # Validation
-  validate_string($user)
-  validate_absolute_path($path)
-  validate_string($group)
 
   if ($group == '') {
     $concat_group = $user

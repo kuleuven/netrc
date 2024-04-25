@@ -31,19 +31,12 @@
 # }
 #
 define netrc::machine (
-  $login,
-  $password,
-  $path         = undef,
-  $netrc_path   = undef,
-  $machine      = $name,
+  String $login,
+  String $password,
+  Optional[String] $path         = undef,
+  Optional[String] $netrc_path   = undef,
+  String $machine                = $name,
 ) {
-
-  # validate parameters here
-  validate_string($machine)
-  validate_string($netrc_path)
-  validate_string($path)
-  validate_string($login)
-  validate_string($password)
 
   if $path == undef {
     if $netrc_path != undef {
